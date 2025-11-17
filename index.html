@@ -3,121 +3,193 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Love Page</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Cache Control -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <title>Love Calculator 2.0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(110deg, #ff9a9e, #fad0c4);
+      background: linear-gradient(135deg, #ff4081, #ff8a80, #ff1744);
+      background-size: 300% 300%;
+      animation: bgMove 8s infinite;
       font-family: 'Poppins', sans-serif;
+      overflow: hidden;
     }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: absolute;
+      color: rgba(255,255,255,0.6);
+      animation: floatUp 6s linear infinite;
+      font-size: 20px;
+    }
+    @keyframes floatUp {
+      from { transform: translateY(100vh) scale(0.5); opacity: 1; }
+      to { transform: translateY(-10vh) scale(1.4); opacity: 0; }
+    }
+
     #box {
-      background: white;
-      padding: 30px 40px;
-      border-radius: 15px;
-      box-shadow: 0px 8px 20px rgba(0,0,0,0.15);
+      background: rgba(255,255,255,0.9);
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: 0px 12px 30px rgba(0,0,0,0.25);
       text-align: center;
-      width: 350px;
-      max-width: 90%;
+      width: 380px;
+      backdrop-filter: blur(10px);
+      animation: popIn 0.7s ease;
     }
+
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
     h1 {
       margin-bottom: 20px;
-      color: #ff5370;
+      color: #ff1744;
       font-family: 'Dancing Script', cursive;
+      font-size: 40px;
+      animation: glow 2s infinite;
     }
+
+    @keyframes glow {
+      0%,100% { text-shadow: 0 0 10px #ff4081; }
+      50% { text-shadow: 0 0 20px #ff1744; }
+    }
+
     input[type="text"] {
-      width: 250px;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #da5296;
-      font-size: 14px;
+      width: 260px;
+      padding: 12px;
+      border-radius: 10px;
+      border: 2px solid #ff4081;
+      font-size: 15px;
       outline: none;
       transition: 0.3s;
     }
+
     input[type="text"]:focus {
-      border: 2px solid #ff5370;
-      box-shadow: 0 0 8px rgba(255, 83, 112, 0.6);
-      color: #ff5370;
+      border-color: #ff1744;
+      box-shadow: 0 0 12px rgba(255, 23, 68, 0.6);
     }
-    input[type="button"] {
-      margin-top: 15px;
-      padding: 10px 20px;
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
       border: none;
       border-radius: 999px;
-      background: #ff5370;
+      background: linear-gradient(45deg,#ff1744,#ff4081);
       color: white;
       font-weight: bold;
       cursor: pointer;
+      width: 200px;
+      font-size: 16px;
+      transition: 0.3s;
+      box-shadow: 0 6px 15px rgba(255,23,68,0.35);
     }
-    input[type="button"]:hover {
-      background: rgb(214, 25, 88);
+
+    button:hover {
+      transform: scale(1.08);
+      background: linear-gradient(45deg,#ff4081,#ff1744);
     }
+
     #result {
-      margin-top: 20px;
-      font-size: 18px;
+      margin-top: 25px;
+      font-size: 20px;
       font-weight: bold;
-      color: #ff5370;
+      color: #d50000;
+      animation: fadeIn 1s ease;
     }
-    /* Mobile screens */
-    @media (max-width: 480px) {
-      #box { width: 90%; padding: 20px; }
-      input[type="text"] { width: 90%; font-size: 16px; }
-      h1 { font-size: 24px; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Heart pulse for % */
+    .pulse {
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
+
+  <!-- Random Floating Hearts -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      let h = document.createElement("div");
+      h.className = "heart";
+      h.innerHTML = "❤️";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.animationDelay = Math.random() * 5 + "s";
+      h.style.fontSize = 15 + Math.random()*25 + "px";
+      document.body.appendChild(h);
+    }
+  </script>
+
   <div id="box">
-    <h1>Love Calculator</h1>
+    <h1>Love Calculator ❤️‍🔥</h1>
+
     <input type="text" name="one" placeholder="Enter Your Name"><br><br>
-    <input type="text" name="two" placeholder="Enter Your Lover Name"><br><br>
-    <input type="button" name="calc" value="Calculate" onclick="return validateForm()">
-    <div id="result"></div> <!-- Result will show here -->
+    <input type="text" name="two" placeholder="Enter Lover's Name"><br><br>
+
+    <button onclick="return calculateLove()">Calculate 💘</button>
+
+    <div id="result"></div>
   </div>
 
   <script>
-  function validateForm() {
-    let name1 = document.getElementsByName("one")[0].value.trim();
-    let name2 = document.getElementsByName("two")[0].value.trim();
-    let resultDiv = document.getElementById("result");
+    function calculateLove() {
+      let name1 = document.getElementsByName("one")[0].value.trim();
+      let name2 = document.getElementsByName("two")[0].value.trim();
+      let res = document.getElementById("result");
 
-    if (name1 === "" || name2 === "") {
-      resultDiv.innerHTML = "⚠️ Please enter both names 💖";
-      return false;
-    }
-    if (name1.length < 3 || name2.length < 3) {
-      resultDiv.innerHTML = "⚠️ Names should be at least 3 characters long!";
-      return false;
-    }
-
-    // Special cases with 100% love
-    let pairs = [
-      ["dushy", "kalyani"],
-      ["dushsyanthan", "kavitha"],
-      ["dushy", "kavitha"],
-      ["vaanu", "pugazh"],
-      ["dushsyanthan","kalyani"], ["abhinesh","logeshwari"],
-["avinesh","Feba angelin"], 
-["dushsyanthan","rukmani"]
-    ];
-
-    for (let [a, b] of pairs) {
-      if ((name1.toLowerCase() === a && name2.toLowerCase() === b) ||
-          (name1.toLowerCase() === b && name2.toLowerCase() === a)) {
-        resultDiv.innerHTML = `${name1} ❤️ ${name2} = <b>1000% love!</b>`;
-        return true;
+      if (name1 === '' || name2 === '') {
+        res.innerHTML = "⚠️ Enter both names, you naughty lover! 😘";
+        return;
       }
-    }
 
-    // Random love percentage
-    let lovePercent = Math.floor(Math.random() * 100) + 1;
-    resultDiv.innerHTML = `${name1} ❤️ ${name2} = <b>${lovePercent}% love!</b>`;
-    return true;
-  }
+      let pairs = [
+        ["dushy","kalyani"], ["dushsyanthan","kavitha"],
+        ["dushy","kavitha"], ["vaanu","pugazh"],
+        ["abhinesh","logeshwari"], ["avinesh","feba angelin"],
+        ["dushsyanthan","rukmani"], ["dushsyanthan","kalyani"]
+      ];
+
+      for (let [a,b] of pairs) {
+        if ((name1.toLowerCase()==a && name2.toLowerCase()==b) ||
+            (name1.toLowerCase()==b && name2.toLowerCase()==a)) {
+          res.innerHTML = `<span class='pulse'>${name1} ❤️ ${name2} = <b>1000% LOVE!</b></span>`;
+          return;
+        }
+      }
+
+      let percent = Math.floor(Math.random()*100)+1;
+      res.innerHTML = `<span class='pulse'>${name1} ❤️ ${name2} = <b>${percent}%</b> love! 💞</span>`;
+    }
   </script>
+
 </body>
 </html>
